@@ -12,9 +12,13 @@ app.use(express.json());
 //Models
 const User = require('./models/User');
 
+//Index html
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Open route - Public Route
-app.get('/', (req, res) => {
-    res.status(200).json({ msg: 'Bem vindo a API' })
+app.get('/auth/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
 });
 
 //Private Route
@@ -114,4 +118,3 @@ mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.8mnxtks.mongodb.n
     console.log("Conectado ao banco");
 }).catch((err) => console.log(err)
 );
-

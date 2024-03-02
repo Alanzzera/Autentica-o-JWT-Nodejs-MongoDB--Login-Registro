@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/base/_reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <title>LOGIN</title>
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('btn-login').addEventListener('click', async function() {
+            const usuario = document.querySelector('input[name="usuario"]').value;
+            const senha = document.querySelector('input[name="senha"]').value;
+            
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: usuario, password: senha })
+                });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert(data.msg); // Exibir mensagem de sucesso
+                    // Redirecionar ou fazer outra ação após o login bem-sucedido
+                } else {
+                    alert(data.msg); // Exibir mensagem de erro
+                }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                alert('Erro ao fazer login. Por favor, tente novamente mais tarde.');
+            }
+        });
+    });
+    </script>    
+<body>
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça Login<br>E entre para o nosso time</h1>
+            <img src="/assets/img/Astronaut-suit-pana.svg" class="left-img" alt="Astronaut">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>LOGIN</h1>
+                <div class="textfield">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" name="usuario" placeholder="Usuário">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" placeholder="Senha">
+                </div>
+                <button id="btn-login" class="btn-login">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
