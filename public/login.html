@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/base/_reset.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <script src="login.js"></script>
+    <title>Entrar</title>
+</head>
+
+<body>
+    <div>
+        <p id="error-message"></p>
+    </div>
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Cadastre-se<br>E entre para o nosso time</h1>
+            <img src="/assets/img/Astronaut-suit-pana.svg" class="left-img" alt="Astronaut">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Entrar</h1>
+                <div id="message"></div>
+                <div id="errorMessage"></div>
+                <form action='/auth/login' method="POST">
+                    <div class="textfield">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" placeholder="Email">
+                    </div>
+                    <div class="textfield">
+                        <label for="senha">Senha</label>
+                        <input type="password" name="password" placeholder="Senha">
+                    </div>
+                    <button id="btn-login" class="btn-login" type="submit">Login</button>
+                </form>
+                <button id="btn-cadastrar" class="btn-cadastrar">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("btn-cadastrar").addEventListener("click", function () {
+        window.location.href = "/auth/register";
+    });
+    const urlParams = new URLSearchParams(window.location.search);
+    const msg = urlParams.get('msg');
+    if (msg) {
+        const messageContainer = document.getElementById('message');
+        messageContainer.innerText = msg;
+    };
+    const errmsg = urlParams.get('errmsg');
+    if (errmsg) {
+        const messageContainer = document.getElementById('errorMessage');
+        messageContainer.innerText = errmsg;
+    };
+</script>
+
+</html>
