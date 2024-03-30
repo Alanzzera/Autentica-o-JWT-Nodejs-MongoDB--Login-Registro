@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/assets/css/base/_reset.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/register.css">
-    <script src="service.js"></script>
     <title>Cadastrar</title>
 </head>
 
@@ -21,24 +20,22 @@
         <div class="right-login">
             <div class="card-login">
                 <h1>Cadastrar</h1>
-                <div id="message"></div>
-                <div id="errorMessage"></div>
                 <form action='/auth/register' method="POST">
                     <div class="textfield">
                         <label for="name">Nome</label>
-                        <input type="text" name="name" placeholder="Nome">
+                        <input type="text" name="name" placeholder="Nome" required>
                     </div>
                     <div class="textfield">
                         <label for="usuario">Email</label>
-                        <input type="text" name="email" placeholder="Email">
+                        <input type="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="textfield">
                         <label for="senha">Senha</label>
-                        <input type="password" name="password" placeholder="Senha">
+                        <input type="password" name="password" placeholder="Senha" required>
                     </div>
                     <div class="textfield">
                         <label for="password">Confirmar Senha</label>
-                        <input type="password" name="confirmpassword" placeholder="Confirmação de Senha">
+                        <input type="password" name="confirmpassword" placeholder="Confirmação de Senha" required>
                     </div>
                     <button id="btn-register" class="btn-cadastrar" type="submit">Cadastrar</button>
                 </form>
@@ -51,16 +48,6 @@
     document.getElementById("btn-home").addEventListener("click", function () {
         window.location.href = "/";
     });
-    const urlParams = new URLSearchParams(window.location.search);
-    const msg = urlParams.get('msg');
-    if (msg) {
-        const messageContainer = document.getElementById('message');
-        messageContainer.innerText = msg;
-    };
-    const errmsg = urlParams.get('errmsg');
-    if (errmsg) {
-        const messageContainer = document.getElementById('errorMessage');
-        messageContainer.innerText = errmsg;
-    };
 </script>
+
 </html>

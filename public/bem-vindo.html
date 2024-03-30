@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/base/_reset.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="service.js"></script>
+    <link rel="stylesheet" href="/assets/css/bem-vindo.css">
     <title>Bem Vindo</title>
 </head> 
 <body>
@@ -17,8 +17,46 @@
         </div>
         <div class="right-login">
             <div class="card-login">
+                <H2>Lista de Usuários do Time</H2>
+                <br><br>
+                <ul id="userList"></ul>
             </div>
         </div>
     </div>
 </body>
+<script>
+    window.onload = function() {
+        // Faz uma solicitação AJAX para obter a lista de usuários
+        fetch('/users', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token') // Se estiver utilizando JWT
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Limpa a lista de usuários existente
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+
+            // Adiciona cada usuário à lista
+            data.forEach(user => {
+                const li = document.createElement('li');
+                const spanName = document.createElement('span');
+                spanName.textContent = 'Nome: ' + user.name;
+                li.appendChild(spanName);
+                li.appendChild(document.createElement('br')); // Adiciona uma quebra de linha
+
+
+                const spanEmail = document.createElement('span');
+                spanEmail.textContent = 'Email: ' + user.email;
+                li.appendChild(spanEmail);
+
+                userList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Erro ao obter a lista de usuários:', error));
+    }
+</script>
 </html>

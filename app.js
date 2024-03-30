@@ -5,14 +5,15 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const app = express();
+const cookieParser = require('cookie-parser');
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
 
 //Models
 const User = require('./models/User');
-
 //Index html
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,45 +28,59 @@ app.get('/auth/login', (req, res) => {
 app.get('/auth/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'register.html'))
 });
+app.get('/bem-vindo.html', checkToken, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'bem-vindo.html'));
+});
 
 //Private Route
-app.get('/user/:id', async (req, res) => {
+app.get('/user/:id', checkToken, async (req, res) => {
     const { id } = req.params;
-    const token = req.query.token;
-
-    if (!token) {
-        return res.status(401).json({ msg: 'Token não fornecido' });
-    }
 
     try {
+        const token = req.cookies.token;
         const secret = process.env.SECRET;
         const decoded = jwt.verify(token, secret);
 
         // Verifique se o ID na URL corresponde ao ID no token
         if (decoded.id !== id) {
-            return res.status(401).json({ msg: 'Token inválido para este usuário' });
+            return res.status(401).redirect('/auth/login');
         }
 
         // Redirecione para a página bem-vindo.html
         res.sendFile(path.join(__dirname, 'public', 'bem-vindo.html'));
     } catch (error) {
-        console.log(error);
-        res.status(400).json({ msg: 'Token inválido' });
+        res.status(400).redirect('/auth/login');
+    }
+});
+
+// Rota para obter a lista de usuários
+app.get('/users', checkToken, async (req, res) => {
+    try {
+        // Busca todos os usuários do banco de dados
+        const users = await User.find({}, 'name email');
+
+        // Envie a lista de usuários como resposta
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao buscar usuários' });
     }
 });
 
 function checkToken(req, res, next) {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = req.cookies.token; // Extrair o token do cookie
+
     if (!token) {
-        return res.status(401).json({ msg: 'Acesso negado' })
-    };
+        return res.status(401).redirect('/auth/login'); // Redirecionar para a página de login se não houver token
+    }
+
     try {
         const secret = process.env.SECRET;
-        jwt.verify(token, secret);
-        next()
+        const decoded = jwt.verify(token, secret);
+        req.user = decoded; // Adicionar o usuário decodificado ao objeto de requisição para acesso posterior
+        next(); // Chamar next() para prosseguir com o fluxo da requisição
     } catch (error) {
-        res.status(400).json({msg: 'Token inválido'})
+        console.log(error);
+        res.status(401).redirect('/auth/login');
     }
 };
 
@@ -74,15 +89,15 @@ app.post('/auth/register', async (req, res) => {
     const { name, email, password, confirmpassword } = req.body
     //Validações
     if (!name, !email, !password, !confirmpassword) {
-        return res.status(422).redirect('/auth/register?errmsg=Campos Obrigatórios' )
+        return res.status(422).redirect('/auth/register')
     };
     if (password !== confirmpassword) {
-        return res.status(422).redirect('/auth/register?errmsg=As senhas não conferem')
+        return res.status(422).redirect('/auth/register')
     };
     //Check se já existe o usuario
     const userExists = await User.findOne({ email: email })
     if (userExists) {
-        return res.redirect('/auth/register?errmsg=Usuário ja cadastrado')
+        return res.redirect('/auth/register')
     };
     //Create password Hash
     const salt = await bcrypt.genSalt(12);
@@ -95,10 +110,10 @@ app.post('/auth/register', async (req, res) => {
     });
     try {
         await user.save();
-        res.status(201).redirect('/auth/login?msg=Usuário cadastrado com sucesso, faça login')
+        res.status(201).redirect('/auth/login')
     } catch (error) {
         console.log(error);
-        res.status(500).redirect('/auth/register?errmsg=Erro servidor')
+        res.status(500).redirect('/auth/register')
     }
 });
 
@@ -107,17 +122,17 @@ app.post('/auth/login', async (req, res) => {
     const { email, password } = req.body;
     //Validações
     if (!email || !password) {
-        return res.status(422).redirect('/auth/login?errmsg=Campos Obrigatórios');
+        return res.status(422).redirect('/auth/login');
     };
     //Check se já existe o usuario
     const user = await User.findOne({ email: email })
     if (!user) {
-        return res.status(404).redirect('/auth/login?errmsg=Usuário não encontrado');
+        return res.status(404).redirect('/auth/login');
     };
     //Check usuario senha
     const checkPassword = await bcrypt.compare(password, user.password)
     if (!checkPassword) {
-        return res.status(422).redirect('/auth/login?errmsg=Senha inválida');
+        return res.status(422).redirect('/auth/login');
     };
     //Logar
     try {
@@ -126,11 +141,14 @@ app.post('/auth/login', async (req, res) => {
             id: user._id,
         }, secret
         )
-        res.status(200).redirect(`/user/${user._id}?token=${token}`)
+        res.status(200).cookie('token', token, { httpOnly: true }).redirect(`/user/${user._id}`);
     } catch (error) {
         console.log(error);
-        res.status(500).redirect('/auth/login?errmsg=Erro servidor')
+        res.status(500).redirect('/auth/login')
     }
 });
 
-app.listen(3000); // iniciar o servidor na porta 3000
+app.listen({
+    host: '0.0.0.0',
+    port: process.env.PORT ?? 3000
+})

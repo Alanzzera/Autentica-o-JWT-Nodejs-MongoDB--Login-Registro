@@ -1,0 +1,25 @@
+
+h2{
+    color: #ffffff; /* Altera a cor do texto para branco */
+    display: flex;
+    
+}
+#userList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 95%;
+    max-height: 100%; /* Garante que a lista não ultrapasse a altura da div */
+    overflow-y: auto; /* Habilita a barra de rolagem vertical na lista, se necessário */
+    color: #00ff88; /* Altera a cor do texto para branco */
+
+}
+
+#userList li {
+    padding: 1%;
+    border-bottom: 1px solid #ddd;
+}
+
+#userList li:last-child {
+    border-bottom: none; /* Remove a borda inferior do último item da lista */
+}
