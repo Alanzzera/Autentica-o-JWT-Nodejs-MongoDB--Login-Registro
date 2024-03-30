@@ -2,7 +2,9 @@
 h2{
     color: #ffffff; /* Altera a cor do texto para branco */
     display: flex;
-    
+    font-weight: bold;
+    position: absolute; /* Define o posicionamento absoluto */
+    top: 0; /* Define a distância do topo como 0 */
 }
 #userList {
     list-style-type: none;
@@ -18,8 +20,21 @@ h2{
 #userList li {
     padding: 1%;
     border-bottom: 1px solid #ddd;
+    font-weight: 500;
 }
 
 #userList li:last-child {
     border-bottom: none; /* Remove a borda inferior do último item da lista */
+}
+
+@media only screen and (max-width: 600px){
+    .card-login {
+        height: auto; /* Ou defina uma altura adequada conforme necessário */
+
+    }
+
+    h2{
+        font-weight: bold;
+        position: relative; /* Define o posicionamento absoluto */
+    }
 }
