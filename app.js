@@ -28,6 +28,10 @@ app.get('/auth/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'register.html'))
 });
 
+app.get('/user/:id', checkToken, async (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'bem-vindo.html'))
+});
+
 //Private Route
 app.get('/user/:id', checkToken, async (req, res) => {
     const { id } = req.params;
