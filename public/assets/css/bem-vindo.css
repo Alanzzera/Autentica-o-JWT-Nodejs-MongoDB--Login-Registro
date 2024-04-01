@@ -10,7 +10,7 @@ h2{
     list-style-type: none;
     padding: 0;
     margin: 0;
-    width: 95%;
+    width: 100%;
     max-height: 100%; /* Garante que a lista não ultrapasse a altura da div */
     overflow-y: auto; /* Habilita a barra de rolagem vertical na lista, se necessário */
     color: #00ff88; /* Altera a cor do texto para branco */
@@ -20,6 +20,7 @@ h2{
 #userList li {
     padding: 1%;
     border-bottom: 1px solid #ddd;
+    font-size: 20px;
     font-weight: 500;
 }
 

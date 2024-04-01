@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/assets/css/register.css">
     <title>Cadastrar</title>
 </head>
-
 <body>
     <div class="main-login">
         <div class="left-login">
@@ -20,34 +19,30 @@
         <div class="right-login">
             <div class="card-login">
                 <h1>Cadastrar</h1>
-                <form action='/auth/register' method="POST">
+                <p id="error-message"></p>
+                <form id="register-form" method="POST">
                     <div class="textfield">
                         <label for="name">Nome</label>
-                        <input type="text" name="name" placeholder="Nome" required>
+                        <input type="text" id="name" name="name" placeholder="Nome" required>
                     </div>
                     <div class="textfield">
                         <label for="usuario">Email</label>
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="textfield">
                         <label for="senha">Senha</label>
-                        <input type="password" name="password" placeholder="Senha" required>
+                        <input type="password" id="password" name="password" placeholder="Senha" required>
                     </div>
                     <div class="textfield">
-                        <label for="password">Confirmar Senha</label>
-                        <input type="password" name="confirmpassword" placeholder="Confirmação de Senha" required>
+                        <label for="confirmpassword">Confirmar Senha</label>
+                        <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirmação de Senha" required>
                     </div>
                     <button id="btn-register" class="btn-cadastrar" type="submit">Cadastrar</button>
                 </form>
-                <button id="btn-home" class="btn-home">Tela Inicial</button>
+                <button id="btn-home" class="btn-home">Home</button>
             </div>
         </div>
     </div>
 </body>
-<script>
-    document.getElementById("btn-home").addEventListener("click", function () {
-        window.location.href = "/";
-    });
-</script>
-
+<script src="/scripts/register.js"></script>
 </html>

@@ -11,10 +11,23 @@
 
 }
 
+card-login {
+    height: auto;
+}
+
+form .textfield > input{
+    padding: 5%;
+
+}
+
+form .textfield > label{
+    margin-bottom: 5%;
+}
+
 form .btn-cadastrar{
     width: 100%;
-    padding: 10px 0px;
-    margin: 10px;
+    padding: 4% 0px;
+    margin: 4%;
     border: none;
     border-radius: 8px;
     outline: none;
@@ -24,6 +37,10 @@ form .btn-cadastrar{
     color: #2b134b;
     background: #00ff88;
     cursor: pointer;
+}
+
+form .textfield > label{
+    margin-bottom: 8px;
 }
 
 @media only screen and (max-width: 600px){
@@ -39,14 +56,14 @@ form .btn-cadastrar{
     
     form .btn-cadastrar{
         width: 100%;
-        padding: 8px 0px;
-        margin: 15px;
+        padding: 1% 0px;
+        margin: 10px;
         border: none;
         border-radius: 8px;
         outline: none;
         text-transform: uppercase;
-        font-weight: 800;
-        letter-spacing: 3px;
+        font-weight: 600;
+        letter-spacing: 2px;
         color: #2b134b;
         background: #00ff88;
         cursor: pointer;
@@ -62,6 +79,6 @@ form .btn-cadastrar{
     }
 
     form .textfield > label{
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
 }
