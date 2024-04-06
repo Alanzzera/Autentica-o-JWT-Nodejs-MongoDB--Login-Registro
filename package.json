@@ -2,7 +2,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && Exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "node --watch --no-warnings app.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

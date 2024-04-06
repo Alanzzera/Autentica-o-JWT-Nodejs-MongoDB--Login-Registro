@@ -179,14 +179,14 @@ form .textfield > input::placeholder{
     }
     .left-login{
         width: 100%;
-        height: auto;
+
     }
     .right-login{
         width: 100%;
         height: auto;
     }
     .left-img{
-        width: 50vw;
+        width: 60%;
     }
     .card-login{
         width: 100%;
