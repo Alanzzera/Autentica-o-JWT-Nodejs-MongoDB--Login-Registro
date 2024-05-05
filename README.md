@@ -8,11 +8,11 @@ Este projeto utiliza o MongoDB como banco de dados. Para mais informações, vis
 
 ## Deploy
 
-A aplicação está hospedada no [Render](https://render.com/).
+A aplicação está hospedada na AWS [link](http://18.231.45.230:3000/).
 
 ## Link Acesso
 
-https://autenticacao-jwt-nodejs-mongodb-login.onrender.com
+[link](http://18.231.45.230:3000/).
 
 ## Contribuições
 
