@@ -1,19 +1,17 @@
 
 h2{
-    color: #ffffff; /* Altera a cor do texto para branco */
-    display: flex;
+    color: #ffffff;
     font-weight: bold;
-    position: absolute; /* Define o posicionamento absoluto */
-    top: 0; /* Define a distância do topo como 0 */
+    position: relative; 
 }
 #userList {
     list-style-type: none;
     padding: 0;
     margin: 0;
     width: 100%;
-    max-height: 100%; /* Garante que a lista não ultrapasse a altura da div */
-    overflow-y: auto; /* Habilita a barra de rolagem vertical na lista, se necessário */
-    color: #00ff88; /* Altera a cor do texto para branco */
+    max-height: 100%; 
+    overflow-y: auto; 
+    color: #00ff88; 
 
 }
 
@@ -25,17 +23,17 @@ h2{
 }
 
 #userList li:last-child {
-    border-bottom: none; /* Remove a borda inferior do último item da lista */
+    border-bottom: none;
 }
 
 @media only screen and (max-width: 600px){
     .card-login {
-        height: auto; /* Ou defina uma altura adequada conforme necessário */
+        height: auto;
 
     }
 
     h2{
         font-weight: bold;
-        position: relative; /* Define o posicionamento absoluto */
+        position: relative;
     }
 }

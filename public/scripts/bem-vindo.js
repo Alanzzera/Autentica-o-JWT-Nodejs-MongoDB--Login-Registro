@@ -19,7 +19,7 @@ window.onload = function () {
                 const spanName = document.createElement('span');
                 spanName.textContent = 'Nome: ' + user.name;
                 li.appendChild(spanName);
-                li.appendChild(document.createElement('br')); // Adiciona uma quebra de linha
+                li.appendChild(document.createElement('br'));
 
                 const spanEmail = document.createElement('span');
                 spanEmail.textContent = 'Email: ' + user.email;

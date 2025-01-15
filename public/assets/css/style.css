@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;700&display=swap');
 
-body{
+body {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
 }
-body *{
+
+body * {
     box-sizing: border-box;
 }
-.main-login{
+
+.main-login {
     width: 100vw;
     height: 100vh;
     background: #201b2c;
@@ -16,7 +18,8 @@ body *{
     align-items: center;
     background: #00000056 linear-gradient(#000000, #000000a3);
 }
-.left-login{
+
+.left-login {
     width: 60vw;
     height: 100vh;
     display: flex;
@@ -24,171 +27,148 @@ body *{
     align-items: center;
     flex-direction: column;
 }
-.left-login > h1{
-    font-size: 3vw;
+
+.left-login > h1 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
     color: #77ffc0;
-}
-.left-img{
-    width: 34vw;
+    text-align: center;
 }
 
-.right-login{
+.left-img {
+    width: 80%;
+    max-width: 600px;
+}
+
+.right-login {
     width: 40vw;
-    height: 80vh;
-    display: flex;
-    position: relative;
-    align-items: center;
-}
-
-.card-login{
-    width: 70%;
-    height: 80%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    padding: 20px 25px;
+}
+
+.card-login {
+    width: 100%;
+    max-width: 400px;
+    min-height: fit-content;
+    padding: clamp(20px, 4vw, 40px);
     background: #2f2841;
     border-radius: 20px;
     box-shadow: 0px 10px 40px #00000056;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
 }
 
-.card-login > h1{
+.card-login > h1 {
     color: #00ff88;
     font-weight: 800;
-    margin: 5%;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin: 0;
+    text-align: center;
     text-shadow: 0px 10px 40px #000000d1;
 }
 
 .card-login > p {
-    text-align: center; /* Centraliza o texto horizontalmente */
-    margin-top: 0; /* Adiciona um espaço superior */
-    color: red; /* Cor do texto vermelho para indicar um erro */
-    font-size: small;
-    font-weight: 500;
+    text-align: center;
+    color: red;
+    font-size: 0.875rem;
+    margin: 0;
 }
 
-form{
+form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
 }
 
-form .textfield{
+.textfield {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 10px 0px;
+    gap: 8px;
 }
-form .textfield > input{
+
+.textfield > input {
     width: 100%;
     border: none;
     border-radius: 10px;
-    padding: 15px;
+    padding: clamp(10px, 2vw, 15px);
     background: #514869;
     color: #f0ffffde;
-    font-size: 12pt;
+    font-size: clamp(0.875rem, 2vw, 1rem);
     box-shadow: 0px 10px 40px #00000056;
     outline: none;
-    box-sizing: border-box;
 }
 
-form .textfield > label{
+.textfield > label {
     color: #f0ffffde;
-    margin-bottom: 10px;
+    font-size: clamp(0.875rem, 2vw, 1rem);
 }
 
-form .textfield > input::placeholder{
+.textfield > input::placeholder {
     color: #f0ffff94;
 }
 
-.btn-login{
+.btn-login, .btn-cadastrar, .btn-home {
     width: 100%;
-    padding: 16px 0px;
-    margin: 25px;
+    padding: clamp(10px, 2vw, 16px);
+    margin: 10px 0;
     border: none;
     border-radius: 8px;
     outline: none;
     text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
+    font-weight: 700;
+    letter-spacing: 2px;
     color: #2b134b;
     background: #00ff88;
     cursor: pointer;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    transition: all 0.3s ease;
 }
 
-.btn-login:hover{
+.btn-cadastrar, .btn-home {
+    background: #00ff88ae;
+}
+
+.btn-login:hover, .btn-cadastrar:hover, .btn-home:hover {
     box-shadow: 0px 10px 40px -12px #00ff8052;
+    transform: translateY(-2px);
 }
 
-.btn-cadastrar{
-    width: 85%;
-    padding: 14px 0px;
-    margin: 20px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #2b134b;
-    background: #00ff88ae;
-    cursor: pointer;
-
-}
-
-.btn-cadastrar:hover{
-    box-shadow: 0px 10px 40px -12px #00ff8042;
-}
-
-.btn-home{
-    width: 80%;
-    padding: 14px 0px;
-    margin: 20px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: #2b134b;
-    background: #00ff88ae;
-    cursor: pointer;
-
-}
-
-.btn-home:hover{
-    box-shadow: 0px 10px 40px -12px #00ff8042;
-}
-
-@media only screen and (max-width: 950px){
-    .card-login{
-        width: 80%;
-    }
-}
-
-@media only screen and (max-width: 600px){
-    .main-login{
+@media only screen and (max-width: 768px) {
+    .main-login {
         flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        padding: 20px;
     }
-    .left-login > h1{
+
+    .left-login {
+        width: 100%;
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .left-login > h1 {
         display: none;
     }
-    .left-login{
-        width: 100%;
 
+    .left-img {
+        width: 60%;
     }
-    .right-login{
+
+    .right-login {
         width: 100%;
         height: auto;
     }
-    .left-img{
-        width: 60%;
-    }
-    .card-login{
+
+    .card-login {
         width: 100%;
+        margin: 0;
     }
 }
